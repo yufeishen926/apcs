@@ -1,13 +1,13 @@
-import java.util.Scanner;  //may be necessary for input
+//import java.util.Scanner;  //may be necessary for input
 
-import javax.swing.JOptionPane;  //may be necessary for input
+//import javax.swing.JOptionPane;  //may be necessary for input
 
 import kareltherobot.*;
 
 public class Driver implements Directions {
 // declared here so it is visible in all the methods!! 
 // It will be assigned a value in the getInfo method
-	private static Robot roomba; 
+//	private static Robot roomba; 
 
 
 	// You will add very many variables!!
@@ -36,7 +36,7 @@ public class Driver implements Directions {
     World.setVisible(true);
 	 World.setDelay(12);
 
-		Robot roomba = new Robot(7,6,North,200);
+		Robot roomba = new Robot(7,6,East,200);
 
     
 
@@ -48,15 +48,30 @@ public class Driver implements Directions {
 
 		// the line below causes a null pointer exception
 		// what is that and why are we getting it?
-
-		boolean frontIsClear;
-		if(frontIsClear = true)
-		{
-			roomba.move();	
+	
+	
+	while(roomba.facingNorth() == false && roomba.frontIsClear() == true){
+		while (roomba.frontIsClear() == true){
+			roomba.move();
 		}
-			else {
-				roomba.turnLeft();
-			}
+		if (roomba.facingEast() == true){
+			roomba.turnLeft();
+			roomba.move();
+			roomba.turnLeft();
+		}
+		else {
+			roomba.turnLeft();
+			roomba.turnLeft();
+			roomba.turnLeft();
+			roomba.move();
+			roomba.turnLeft();
+			roomba.turnLeft();
+			roomba.turnLeft();
+		}
+
+		
+
+	}
 
 
 
@@ -65,7 +80,7 @@ public class Driver implements Directions {
 	 * this info in the console (boring) or you can present using JOptionPane (cool!)
 	 */
 
-    System.out.println("The biggest pile was ");
+   // System.out.println("The biggest pile was ");
 
 
 
