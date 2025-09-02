@@ -52,12 +52,24 @@ public class Driver implements Directions {
 	
 	while(roomba.facingNorth() == false && roomba.frontIsClear() == true){
 		while (roomba.frontIsClear() == true){
+			while (roomba.nextToABeeper() == true){
+				roomba.pickBeeper();
+			}
 			roomba.move();
+			}
+
+		if (roomba.frontIsClear() == false && roomba.nextToABeeper() == true) {
+			while (roomba.nextToABeeper() == true) {
+				roomba.pickBeeper();
+			}
 		}
+		
 		if (roomba.facingEast() == true){
-			roomba.turnLeft();
-			roomba.move();
-			roomba.turnLeft();
+			if (roomba.facingNorth() == false || roomba.frontIsClear() == true) {
+				roomba.turnLeft();
+				roomba.move();
+				roomba.turnLeft();
+			}
 		}
 		else {
 			roomba.turnLeft();
@@ -68,8 +80,6 @@ public class Driver implements Directions {
 			roomba.turnLeft();
 			roomba.turnLeft();
 		}
-
-		
 
 	}
 
@@ -90,5 +100,5 @@ public class Driver implements Directions {
 
 
   }
-
+   
 }
