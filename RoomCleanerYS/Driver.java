@@ -36,7 +36,7 @@ public class Driver implements Directions {
     World.setVisible(true);
 	 World.setDelay(12);
 
-		Robot roomba = new Robot(7,6,East,200);
+		Robot roomba = new Robot(7,6,East,0);
 
     
 
@@ -65,21 +65,28 @@ public class Driver implements Directions {
 		}
 		
 		if (roomba.facingEast() == true){
+			roomba.turnLeft();
 			if (roomba.facingNorth() == false || roomba.frontIsClear() == true) {
-				roomba.turnLeft();
 				roomba.move();
 				roomba.turnLeft();
+			}
+			else {
+				roomba.turnOff();
 			}
 		}
 		else {
 			roomba.turnLeft();
 			roomba.turnLeft();
 			roomba.turnLeft();
-			roomba.move();
-			roomba.turnLeft();
-			roomba.turnLeft();
-			roomba.turnLeft();
-		}
+			if (roomba.facingNorth() == false || roomba.frontIsClear() == true) {
+				roomba.move();
+				roomba.turnLeft();
+				roomba.turnLeft();
+				roomba.turnLeft();
+			}
+			else {
+				roomba.turnOff();
+			}
 
 	}
 
@@ -101,4 +108,5 @@ public class Driver implements Directions {
 
   }
    
+}
 }
