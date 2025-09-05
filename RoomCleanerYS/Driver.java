@@ -49,25 +49,52 @@ public class Driver implements Directions {
 		// the line below causes a null pointer exception
 		// what is that and why are we getting it?
 	
-	
+	int roomArea = 1;
+	int numberOfPiles = 0;
+	int numberOfBeepers = 0;
+	int largestPile = 0;
+	int X = 0;
+	int Y = 0;
 	while(roomba.facingNorth() == false && roomba.frontIsClear() == true){
 		while (roomba.frontIsClear() == true){
-			while (roomba.nextToABeeper() == true){
-				roomba.pickBeeper();
+			if (roomba.nextToABeeper() == true){
+				int count = 0;
+				while (roomba.nextToABeeper() == true){
+					roomba.pickBeeper();
+					numberOfBeepers++;
+					count++;
+				}
+				numberOfPiles++;
+				if (count > largestPile){
+					largestPile = count;
+					X = roomba.avenue();
+					Y = roomba.street();
+				}
 			}
 			roomba.move();
+			roomArea++;
 			}
 
 		if (roomba.frontIsClear() == false && roomba.nextToABeeper() == true) {
+			int count = 0;
 			while (roomba.nextToABeeper() == true) {
 				roomba.pickBeeper();
+				numberOfBeepers++;
+				count++;
 			}
+			if (count > largestPile){
+				largestPile = count;
+				X = roomba.avenue();
+				Y = roomba.street();
+			}
+			numberOfPiles++;
 		}
 		
 		if (roomba.facingEast() == true){
 			roomba.turnLeft();
 			if (roomba.facingNorth() == false || roomba.frontIsClear() == true) {
 				roomba.move();
+				roomArea++;
 				roomba.turnLeft();
 			}
 			else {
@@ -80,6 +107,7 @@ public class Driver implements Directions {
 			roomba.turnLeft();
 			if (roomba.facingNorth() == false || roomba.frontIsClear() == true) {
 				roomba.move();
+				roomArea++;
 				roomba.turnLeft();
 				roomba.turnLeft();
 				roomba.turnLeft();
@@ -89,9 +117,7 @@ public class Driver implements Directions {
 			}
 
 	}
-
-
-
+	
   	/** This method displays the results of cleaning the room.  All of the info
 	 * in the pdf that describes the problem need to be displayed.  You can present
 	 * this info in the console (boring) or you can present using JOptionPane (cool!)
@@ -99,7 +125,13 @@ public class Driver implements Directions {
 
    // System.out.println("The biggest pile was ");
 
-
+	System.out.println("the area of the room is " + roomArea + " sq units.");
+	System.out.println("there were " + numberOfPiles + " piles.");
+	System.out.println("there were " + numberOfBeepers + " beepers.");
+	System.out.println("the largest pile had " + largestPile + " beepers.");
+	System.out.println("the largest pile was at avenue " + X + " street " + Y + ".");
+	System.out.println("on average, each pile had " + (double)numberOfBeepers/numberOfPiles + " beepers.");
+	System.out.println("the room was " + (double)numberOfPiles/roomArea*100 + "% dirty.");
 
 
 
