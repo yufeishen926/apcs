@@ -30,13 +30,13 @@ public class Driver implements Directions {
 	 * JOptionPane.
 	 */
 
-    String wrldName = "basicRoom.wld";
+    String wrldName = "finalTestWorld2024 (5).wld";
 
 		World.readWorld(wrldName);
     World.setVisible(true);
-	 World.setDelay(12);
+	 World.setDelay(0);
 
-		Robot roomba = new Robot(7,6,East,0);
+		Robot roomba = new Robot(26,101,East,0);
 
     
 
