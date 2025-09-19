@@ -17,8 +17,9 @@ public class rectangle {
       System.out.println ("Area: " + width * height);
    }
 
-   public void calcPerimeter() {
-      System.out.println ("Perimeter: " + (width * 2 + height * 2));
+   public double perimeter() {
+      double per = 2 * (width + height);
+      return per;
    }
    
 }
